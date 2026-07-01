@@ -333,3 +333,27 @@ footer {
 }
 
 .hidden { display: none !important; }
+
+/* AJUSTE PROPORCIONAL E CENTRALIZADO DA IMAGEM */
+.image-wrapper {
+    width: 100%;
+    max-width: 480px;      /* Restringe o tamanho dentro do card */
+    margin: 25px auto;      /* Centraliza horizontalmente e dá espaço dos textos */
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    border: 1px solid var(--border-color);
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;    /* Mantém as proporções reais da arte */
+}
+
+/* Filtro opcional de conforto visual no tema de Alto Contraste */
+body.theme-contrast .image-wrapper img {
+    filter: brightness(0.85) contrast(1.1);
+}
