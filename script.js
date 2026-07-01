@@ -7,36 +7,52 @@ const voiceSelect = document.getElementById('voice-select');
 const btnReadPage = document.getElementById('btn-read-page');
 const btnStopRead = document.getElementById('btn-stop-read');
 
-// 1. CARREGAMENTO E CONFIGURAÇÃO DE VOZES MULTIPERFIL
+// 1. CARREGAMENTO DE VOZES DO SISTEMA
 function setupVoices() {
-    // Captura as vozes disponíveis no navegador
     appVoices = synth.getVoices();
 }
-
 if (synth.onvoiceschanged !== undefined) {
     synth.onvoiceschanged = setupVoices;
 }
 setupVoices();
 
-function getSelectedVoiceProfile() {
+// 2. LÓGICA INTELIGENTE PARA MODIFICAR AS PROPRIEDADES DA VOZ
+function applyVoiceProfile(utterance) {
     const selectedProfile = voiceSelect.value;
-    // Tenta encontrar vozes em Português no sistema do usuário
     const ptVoices = appVoices.filter(v => v.lang.includes('pt-BR') || v.lang.includes('pt-PT'));
     
-    if (ptVoices.length === 0) return null;
-
-    // Distribuição lógica para simular os 4 perfis pedidos com base nas vozes instaladas
+    // Se houver mais de uma voz no sistema, tenta alternar entre elas
+    if (ptVoices.length > 0) {
+        if (selectedProfile.includes('fem') && ptVoices[0]) {
+            utterance.voice = ptVoices[0];
+        } else if (selectedProfile.includes('masc') && ptVoices[1]) {
+            utterance.voice = ptVoices[1]; // Usa a segunda voz do sistema se disponível
+        } else {
+            utterance.voice = ptVoices[0];
+        }
+    }
+    
+    // MODIFICAÇÃO ARTIFICIAL (Garante a diferença mesmo se houver apenas 1 voz no sistema!)
     switch(selectedProfile) {
-        case 'fem-1':
-            return ptVoices[0]; // Primeira voz encontrada (comumente feminina padrão)
-        case 'fem-2':
-            return ptVoices[2] || ptVoices[0]; 
-        case 'masc-1':
-            return ptVoices[1] || ptVoices[0]; // Segunda voz encontrada (geralmente perfil alternativo/masculino)
-        case 'masc-2':
-            return ptVoices[3] || ptVoices[1] || ptVoices[0];
+        case 'fem-1': // Feminina Padrão
+            utterance.pitch = 1.2;  // Tom ligeiramente mais agudo
+            utterance.rate = 1.0;   // Velocidade normal
+            break;
+        case 'fem-2': // Feminina Alternativa (Estilo Assistente Virtual)
+            utterance.pitch = 1.4;  // Tom bem mais agudo
+            utterance.rate = 1.15;  // Um pouco mais rápida
+            break;
+        case 'masc-1': // Masculina Principal
+            utterance.pitch = 0.7;  // Tom mais grave/grosso
+            utterance.rate = 0.95;  // Velocidade ligeiramente mais pausada
+            break;
+        case 'masc-2': // Masculina Alternativa
+            utterance.pitch = 0.5;  // Tom extremamente grave
+            utterance.rate = 1.0;   // Velocidade normal
+            break;
         default:
-            return ptVoices[0];
+            utterance.pitch = 1.0;
+            utterance.rate = 1.0;
     }
 }
 
@@ -49,13 +65,10 @@ function speakTextContent(text) {
     if (!text || text.trim() === '') return;
 
     currentUtterance = new SpeechSynthesisUtterance(text);
-    const configuredVoice = getSelectedVoiceProfile();
+    currentUtterance.lang = 'pt-BR';
     
-    if (configuredVoice) {
-        currentUtterance.voice = configuredVoice;
-    } else {
-        currentUtterance.lang = 'pt-BR';
-    }
+    // Aplica as modificações de tom e velocidade baseadas na opção escolhida
+    applyVoiceProfile(currentUtterance);
 
     currentUtterance.onstart = () => btnStopRead.classList.remove('hidden');
     currentUtterance.onend = () => btnStopRead.classList.add('hidden');
@@ -97,7 +110,7 @@ document.querySelectorAll('.btn-read-section').forEach(btn => {
     });
 });
 
-// 2. CONTROLE DE TAMANHO DE FONTE FLUIDO
+// CONTROLE DE TAMANHO DE FONTE FLUIDO
 let textScale = 100;
 document.getElementById('btn-increase').addEventListener('click', () => {
     if (textScale < 180) {
@@ -113,14 +126,11 @@ document.getElementById('btn-decrease').addEventListener('click', () => {
     }
 });
 
-// 3. SELETOR DE MULTITEMAS (VERMELHO, VERDE, LARANJA, ROSA, ALTO CONTRASTE)
+// SELETOR DE MULTITEMAS
 document.querySelectorAll('.theme-btn').forEach(button => {
     button.addEventListener('click', (e) => {
         const pickedTheme = e.target.getAttribute('data-theme');
-        
-        // Remove todas as classes de temas anteriores do body
         body.className = '';
-        
         if (pickedTheme !== 'default') {
             body.classList.add('theme-' + pickedTheme);
         }
