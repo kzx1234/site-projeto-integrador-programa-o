@@ -1,27 +1,78 @@
-/* Variáveis de Cores Base (Padrão: Boa legibilidade e contraste) */
+/* DESIGN COMPLETO COM ESQUEMA DE TEMAS DINÂMICOS */
 :root {
-    --bg-color: #ffffff;
-    --text-color: #222222;
-    --primary-color: #0056b3;
-    --accent-color: #f8f9fa;
-    --border-color: #cccccc;
-    --card-bg: #e9ecef;
-    --focus-outline: #222222;
-    --font-size-base: 1.15rem; /* Inicial ligeiramente maior para UX */
+    /* Tema Azul Padrão (Elegante e Moderno) */
+    --bg-page: #f4f7f6;
+    --bg-card: #ffffff;
+    --primary-color: #1a5276;
+    --text-main: #2c3e50;
+    --text-muted: #566573;
+    --accent-bg: #ebf5fb;
+    --border-color: #d5dbdb;
+    --focus-ring: #2980b9;
+    --font-scale: 100%;
 }
 
-/* Classe de Alto Contraste (Ativada via JS) */
-body.high-contrast {
-    --bg-color: #000000;
-    --text-color: #ffff00; /* Amarelo no preto garante o maior contraste possível */
+/* TEMA: ALTO CONTRASTE */
+body.theme-contrast {
+    --bg-page: #000000;
+    --bg-card: #111111;
     --primary-color: #ffff00;
-    --accent-color: #111111;
+    --text-main: #ffff00;
+    --text-muted: #ffffff;
+    --accent-bg: #222222;
     --border-color: #ffff00;
-    --card-bg: #111111;
-    --focus-outline: #ffffff;
+    --focus-ring: #ffffff;
 }
 
-/* Configurações Globais */
+/* TEMA: VERMELHO */
+body.theme-red {
+    --bg-page: #fdf2f2;
+    --bg-card: #ffffff;
+    --primary-color: #c0392b;
+    --text-main: #2c3e50;
+    --text-muted: #7b241c;
+    --accent-bg: #f9ebea;
+    --border-color: #f5b7b1;
+    --focus-ring: #e74c3c;
+}
+
+/* TEMA: VERDE */
+body.theme-green {
+    --bg-page: #f4f9f4;
+    --bg-card: #ffffff;
+    --primary-color: #1e8449;
+    --text-main: #196f3d;
+    --text-muted: #27ae60;
+    --accent-bg: #e8f8f5;
+    --border-color: #a9dfbf;
+    --focus-ring: #2ecc71;
+}
+
+/* TEMA: LARANJA */
+body.theme-orange {
+    --bg-page: #fef9e7;
+    --bg-card: #ffffff;
+    --primary-color: #d35400;
+    --text-main: #2e4053;
+    --text-muted: #e67e22;
+    --accent-bg: #fdf2e9;
+    --border-color: #f5cbf7;
+    --focus-ring: #f39c12;
+}
+
+/* TEMA: ROSA */
+body.theme-pink {
+    --bg-page: #fbeee6;
+    --bg-card: #ffffff;
+    --primary-color: #b03a2e;
+    --text-main: #4a235a;
+    --text-muted: #af7ac5;
+    --accent-bg: #f5eeec;
+    --border-color: #f5b7b1;
+    --focus-ring: #ec407a;
+}
+
+/* RESET E BASE */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -29,148 +80,214 @@ body.high-contrast {
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
-    font-size: var(--font-size-base);
-    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.8;
+    font-size: calc(var(--font-scale) * 1.1);
+    transition: background-color 0.25s, color 0.25s;
 }
 
-/* Indicador de Foco Visível (Crucial para HCI/Teclado) */
+/* INTERAÇÃO HUMANO-COMPUTADOR: INDICADOR DE FOCO AGRESSIVO */
 *:focus {
-    outline: 3px solid var(--focus-outline) !important;
-    outline-offset: 4px;
+    outline: 4px solid var(--focus-ring) !important;
+    outline-offset: 5px;
 }
 
-/* Barra de Acessibilidade */
+/* PAINEL DE ACESSIBILIDADE FIXO */
 .accessibility-bar {
-    background-color: var(--accent-color);
-    border-bottom: 2px solid var(--border-color);
-    padding: 10px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    background-color: var(--bg-card);
+    border-bottom: 3px solid var(--primary-color);
+    padding: 12px 20px;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 2000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
-.accessibility-bar button, .btn-read-section {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    border: 2px solid var(--border-color);
-    padding: 8px 16px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.accessibility-bar button:hover, .btn-read-section:hover {
-    background-color: var(--text-color);
-    color: var(--bg-color);
-}
-
-/* Cabeçalho e Menu */
-header {
-    background-color: var(--primary-color);
-    color: var(--bg-color);
-    padding: 30px 20px;
-    text-align: center;
-}
-
-nav {
-    background-color: var(--accent-color);
-    border-bottom: 1px solid var(--border-color);
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 15px;
-}
-
-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: bold;
-    padding: 5px 10px;
-}
-
-nav a:hover {
-    text-decoration: underline;
-}
-
-/* Conteúdo Principal */
-main {
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-section {
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.section-header {
+.bar-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-label {
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+/* BOTÕES DE CORES */
+.theme-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+}
+.theme-btn:hover { transform: scale(1.15); }
+.btn-default { background-color: #1a5276; }
+.btn-contrast { background-color: #ffff00; border-color: #000; }
+.btn-red { background-color: #c0392b; }
+.btn-green { background-color: #1e8449; }
+.btn-orange { background-color: #d35400; }
+.btn-pink { background-color: #ec407a; }
+
+/* CONTROLES DE TEXTO E VOZ */
+#btn-increase, #btn-decrease, .action-btn-audio, .action-btn-stop, .btn-read-section {
+    background-color: var(--accent-bg);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 6px 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+#voice-select {
+    padding: 6px;
+    border-radius: 6px;
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    border: 2px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+/* HERO HEADER */
+.hero-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2c3e50 100%);
+    color: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+    box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+}
+
+body.theme-contrast .hero-header {
+    background: #000000;
+    border-bottom: 4px solid #ffff00;
+}
+
+.hero-header h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* MENU DE NAVEGAÇÃO */
+.main-navigation {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.main-navigation ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.main-navigation a {
+    display: block;
+    padding: 16px 24px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color 0.2s;
+}
+
+.main-navigation a:hover {
+    background-color: var(--accent-bg);
+    text-decoration: underline;
+}
+
+/* ÁREA DE CONTEÚDO */
+main {
+    max-width: 950px;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+section {
+    background-color: var(--bg-card);
+    padding: 35px;
+    border-radius: 12px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid var(--border-color);
+}
+
+.section-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent-bg);
+    padding-bottom: 15px;
+    margin-bottom: 22px;
+    gap: 15px;
 }
 
 h2 {
+    font-size: 1.75rem;
     color: var(--primary-color);
 }
 
-p, ul {
-    margin-bottom: 15px;
+p {
+    margin-bottom: 20px;
+    text-align: justify;
 }
 
 ul {
-    margin-left: 25px;
+    margin-left: 30px;
+    margin-bottom: 25px;
 }
 
-/* Estrutura dos Flashcards (Etapa 1) */
-.flashcards-container {
+li {
+    margin-bottom: 10px;
+}
+
+/* GRID DE FLASHCARDS */
+.grid-flashcards {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
-.card {
-    background-color: transparent;
-    width: 300px;
-    height: 180px;
+.flashcard-box {
+    width: 290px;
+    height: 190px;
     perspective: 1000px;
-    cursor: pointer;
 }
 
-.card-inner {
+.flashcard-flip {
     position: relative;
     width: 100%;
     height: 100%;
-    text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
+    border-radius: 10px;
     border: 2px solid var(--border-color);
-    border-radius: 8px;
 }
 
-/* Efeito de virar com Hover ou Foco de Teclado */
-.card:hover .card-inner, .card:focus .card-inner {
+.flashcard-box:hover .flashcard-flip, .flashcard-box:focus .flashcard-flip {
     transform: rotateY(180deg);
 }
 
-.card-front, .card-back {
+.card-front-side, .card-back-side {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -179,30 +296,32 @@ ul {
     align-items: center;
     justify-content: center;
     padding: 20px;
-    border-radius: 6px;
+    border-radius: 8px;
 }
 
-.card-front {
-    background-color: var(--card-bg);
-    color: var(--text-color);
+.card-front-side {
+    background-color: var(--accent-bg);
+    color: var(--primary-color);
 }
 
-.card-back {
-    background-color: var(--text-color);
-    color: var(--bg-color);
+.card-back-side {
+    background-color: var(--primary-color);
+    color: #ffffff;
     transform: rotateY(180deg);
 }
 
-/* Rodapé */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: var(--accent-color);
-    border-top: 1px solid var(--border-color);
-    font-size: 0.9rem;
+body.theme-contrast .card-back-side {
+    color: #ffff00;
 }
 
-/* Classes Auxiliares */
-.hidden {
-    display: none !important;
+/* RODAPÉ */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--bg-card);
+    border-top: 2px solid var(--border-color);
+    margin-top: 60px;
+    color: var(--text-muted);
 }
+
+.hidden { display: none !important; }
