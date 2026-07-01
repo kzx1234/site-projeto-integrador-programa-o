@@ -136,3 +136,24 @@ document.querySelectorAll('.theme-btn').forEach(button => {
         }
     });
 });
+
+// 3. CONTROLE DE ZOOM ACESSÍVEL PARA A IMAGEM
+const imageToZoom = document.getElementById('accessible-image');
+const btnZoomIn = document.getElementById('btn-zoom-in');
+const btnZoomOut = document.getElementById('btn-zoom-out');
+
+if (imageToZoom && btnZoomIn && btnZoomOut) {
+    // Ao clicar em aumentar, adiciona a classe CSS que amplia o max-width
+    btnZoomIn.addEventListener('click', () => {
+        imageToZoom.classList.add('is-expanded');
+        btnZoomIn.setAttribute('aria-pressed', 'true');
+        btnZoomOut.setAttribute('aria-pressed', 'false');
+    });
+
+    // Ao clicar em restaurar, remove a classe e volta ao tamanho inicial
+    btnZoomOut.addEventListener('click', () => {
+        imageToZoom.classList.remove('is-expanded');
+        btnZoomIn.setAttribute('aria-pressed', 'false');
+        btnZoomOut.setAttribute('aria-pressed', 'true');
+    });
+}
