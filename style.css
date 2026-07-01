@@ -1,4 +1,6 @@
-/* DESIGN COMPLETO COM ESQUEMA DE TEMAS DINÂMICOS */
+/* ==========================================================================
+   DESIGN COMPLETO COM ESQUEMA DE TEMAS DINÂMICOS
+   ========================================================================== */
 :root {
     /* Tema Azul Padrão (Elegante e Moderno) */
     --bg-page: #f4f7f6;
@@ -72,7 +74,9 @@ body.theme-pink {
     --focus-ring: #ec407a;
 }
 
-/* RESET E BASE */
+/* ==========================================================================
+   RESET E BASE
+   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -94,7 +98,9 @@ body {
     outline-offset: 5px;
 }
 
-/* PAINEL DE ACESSIBILIDADE FIXO */
+/* ==========================================================================
+   PAINEL DE ACESSIBILIDADE FIXO
+   ========================================================================== */
 .accessibility-bar {
     background-color: var(--bg-card);
     border-bottom: 3px solid var(--primary-color);
@@ -166,7 +172,9 @@ body {
     font-size: 0.9rem;
 }
 
-/* HERO HEADER (CORRIGIDO PARA CENTRALIZAÇÃO TOTAL) */
+/* ==========================================================================
+   HERO HEADER
+   ========================================================================== */
 .hero-header {
     background: linear-gradient(135deg, var(--primary-color) 0%, #2c3e50 100%);
     color: #ffffff;
@@ -186,7 +194,6 @@ body.theme-contrast .hero-header {
     letter-spacing: 1px;
 }
 
-/* Regra corrigida para garantir o texto descritivo centralizado */
 .hero-header p {
     text-align: center !important;
     max-width: 700px;
@@ -194,7 +201,9 @@ body.theme-contrast .hero-header {
     font-size: 1.3rem;
 }
 
-/* MENU DE NAVEGAÇÃO */
+/* ==========================================================================
+   MENU DE NAVEGAÇÃO
+   ========================================================================== */
 .main-navigation {
     background-color: var(--bg-card);
     border-bottom: 1px solid var(--border-color);
@@ -222,7 +231,9 @@ body.theme-contrast .hero-header {
     text-decoration: underline;
 }
 
-/* ÁREA DE CONTEÚDO */
+/* ==========================================================================
+   ÁREA DE CONTEÚDO
+   ========================================================================== */
 main {
     max-width: 950px;
     margin: 40px auto;
@@ -267,7 +278,9 @@ li {
     margin-bottom: 10px;
 }
 
-/* GRID DE FLASHCARDS */
+/* ==========================================================================
+   GRID DE FLASHCARDS
+   ========================================================================== */
 .grid-flashcards {
     display: flex;
     gap: 25px;
@@ -322,7 +335,9 @@ body.theme-contrast .card-back-side {
     color: #ffff00;
 }
 
-/* RODAPÉ */
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
 footer {
     text-align: center;
     padding: 30px;
@@ -334,42 +349,53 @@ footer {
 
 .hidden { display: none !important; }
 
-/* ESTRUTURA INTEGRADA DA IMAGEM, BOTÕES E LEGENDA */
+/* ==========================================================================
+   CORREÇÃO DO FLUXO E ZOOM DA IMAGEM (SEM QUEBRAR O LAYOUT)
+   ========================================================================== */
 .image-container {
     width: 100% !important;
-    margin: 35px auto !important;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
+    max-width: 100% !important;
+    margin: 30px 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 15px;
 }
 
-/* Caixa de controle estrutural para limitar e alinhar o tamanho inicial */
 .image-wrapper-box {
     width: 100%;
-    max-width: 950px;
     display: flex;
     justify-content: center;
     overflow: hidden;
 }
 
+/* Tamanho Inicial Controlado */
 .image-container img {
     width: 100% !important;
-    max-width: 380px !important;    /* Tamanho padrão (pequeno) inicial */
+    max-width: 380px !important; 
     height: auto !important;
     display: block !important;
     object-fit: contain !important;
     border-radius: 8px !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
     border: 1px solid var(--border-color) !important;
-    transition: max-width 0.3s ease-in-out !important; /* Transição suave de tamanho */
+    transition: max-width 0.3s ease-in-out, transform 0.3s ease-in-out !important;
 }
 
-/* CLASSE DE EXPANSÃO INTERATIVA (ACIONADA PELO SCRIPT) */
+/* CLASSE DE EXPANSÃO CORRIGIDA */
 .image-container img.is-expanded {
-    max-width: 750px !important;    /* Tamanho ampliado confortável na tela */
+    max-width: 100% !important; 
+    width: 100% !important;
+    transform: scale(1.0); 
     box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+}
+
+/* Ajuste para desktops (evita que a imagem estoure telas muito grandes) */
+@media (min-width: 768px) {
+    .image-container img.is-expanded {
+        max-width: 700px !important; 
+    }
 }
 
 /* BOTÕES DE CONTROLE DE ZOOM */
@@ -377,6 +403,7 @@ footer {
     display: flex;
     gap: 10px;
     justify-content: center;
+    width: 100%;
     margin-top: 5px;
 }
 
@@ -397,29 +424,19 @@ footer {
     text-decoration: underline;
 }
 
-/* TEXTO DA LEGENDA ALTERNATIVA VISÍVEL */
 .image-caption {
     font-size: 0.9rem !important;
     color: var(--text-muted) !important;
     line-height: 1.4 !important;
     max-width: 600px;
+    text-align: center;
     margin: 5px auto 0 auto !important;
     padding: 0 10px !important;
     font-style: italic;
 }
 
-/* CONFIGURAÇÕES E ADAPTAÇÕES PARA O TEMA DE ALTO CONTRASTE */
-body.theme-contrast .image-caption { 
-    color: var(--text-main) !important; 
-}
-body.theme-contrast .zoom-btn { 
-    border-color: #ffff00; 
-    color: #ffff00; 
-    background: #000; 
-}
-body.theme-contrast .image-container img { 
-    filter: brightness(0.85) contrast(1.1) !important; 
-}
-body.theme-contrast .image-container img.is-expanded { 
-    border-color: #ffff00 !important; 
-}
+/* COMPATIBILIDADE DE CORES NO TEMA DE ALTO CONTRASTE */
+body.theme-contrast .image-caption { color: var(--text-main) !important; }
+body.theme-contrast .zoom-btn { border-color: #ffff00; color: #ffff00; background: #000; }
+body.theme-contrast .image-container img { filter: brightness(0.85) contrast(1.1) !important; }
+body.theme-contrast .image-container img.is-expanded { border-color: #ffff00 !important; }
