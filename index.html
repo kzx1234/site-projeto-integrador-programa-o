@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visão Fácil - Acessibilidade Digital e Cegueira</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="accessibility-bar" role="toolbar" aria-label="Ferramentas de Acessibilidade">
+        <button id="btn-increase" aria-label="Aumentar tamanho do texto">A+</button>
+        <button id="btn-decrease" aria-label="Diminuir tamanho do texto">A-</button>
+        <button id="btn-contrast" aria-label="Alternar Alto Contraste">Alternar Contraste</button>
+        <button id="btn-read-page" aria-label="Ouvir toda a página">Ouvir Página Completa 🔊</button>
+        <button id="btn-stop-read" aria-label="Parar leitura de voz" class="hidden">Parar Leitura ⏹️</button>
+    </div>
+
+    <header role="banner">
+        <h1>Visão Fácil</h1>
+        <p>Projeto Integrador: Inteligência Artificial e Tecnologias Assistivas</p>
+    </header>
+
+    <nav role="navigation" aria-label="Menu Principal">
+        <ul>
+            <li><a href="#sobre">Sobre o Projeto</a></li>
+            <li><a href="#tecnologias">Tecnologias Assistivas</a></li>
+            <li><a href="#flashcards">Flashcards de Estudo</a></li>
+        </ul>
+    </nav>
+
+    <main role="main" id="main-content">
+        
+        <section id="sobre" aria-labelledby="tit-sobre">
+            <div class="section-header">
+                <h2 id="tit-sobre">Cegueira e a Inclusão Digital</h2>
+                <button class="btn-read-section" aria-label="Ouvir secção sobre inclusão digital">Ouvir Secção 🔊</button>
+            </div>
+            <p>A cegueira e a baixa visão afetam milhões de pessoas no mundo. No ambiente digital, a falta de acessibilidade em sites cria barreiras invisíveis que impedem o acesso à informação, à educação e à autonomia.</p>
+            <p>Este site foi desenvolvido como parte do Projeto Integrador do 2º trimestre. O nosso objetivo é demonstrar como práticas simples de UX (Experiência do Usuário) e HCI (Interação Humano-Computador) podem tornar a web um lugar inclusivo para todos.</p>
+        </section>
+
+        <section id="tecnologias" aria-labelledby="tit-tec">
+            <div class="section-header">
+                <h2 id="tit-tec">O que são Tecnologias Assistivas?</h2>
+                <button class="btn-read-section" aria-label="Ouvir secção sobre tecnologias assistivas">Ouvir Secção 🔊</button>
+            </div>
+            <p>Tecnologias assistivas são recursos, ferramentas ou sistemas que promovem a funcionalidade e a autonomia de pessoas com deficiência. Para pessoas cegas ou com baixa visão, destacam-se:</p>
+            <ul>
+                <li><strong>Leitores de Tela:</strong> Softwares que transformam texto em áudio sintetizado (ex: NVDA, JAWS).</li>
+                <li><strong>Ampliadores de Tela:</strong> Ferramentas que aumentam partes da interface para quem tem baixa visão.</li>
+                <li><strong>Sistemas de Alto Contraste:</strong> Ajustes de cores que facilitam a distinção de elementos e textos.</li>
+            </ul>
+        </section>
+
+        <section id="flashcards" aria-labelledby="tit-flash">
+            <div class="section-header">
+                <h2 id="tit-flash">Flashcards Educativos (Etapa 1)</h2>
+                <button class="btn-read-section" aria-label="Ouvir secção dos flashcards">Ouvir Secção 🔊</button>
+            </div>
+            <p>Passe o rato ou foque com o teclado para revelar a resposta do cartão.</p>
+            
+            <div class="flashcards-container">
+                <div class="card" tabindex="0" aria-label="Flashcard 1: O que é UX? Foque ou passe o rato para ver a resposta.">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>O que significa UX?</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Significa User Experience (Experiência do Usuário). É como uma pessoa se sente ao interagir com um sistema digital.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" tabindex="0" aria-label="Flashcard 2: O que é HCI? Foque ou passe o rato para ver a resposta.">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <h3>O que significa HCI?</h3>
+                        </div>
+                        <div class="card-back">
+                            <p>Significa Human-Computer Interaction (Interação Humano-Computador). Estudo do design de interfaces para que a comunicação entre humanos e máquinas seja eficiente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2026 - Projeto Integrador: Inteligência Artificial e Acessibilidade. Desenvolvido para o 2º Trimestre.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
