@@ -1,102 +1,327 @@
-// Inicialização da Web Speech API (Sintetizador de Voz do Navegador)
-const synth = window.speechSynthesis;
-let currentUtterance = null;
-
-// Elementos da Interface
-const body = document.body;
-const btnIncrease = document.getElementById('btn-increase');
-const btnDecrease = document.getElementById('btn-decrease');
-const btnContrast = document.getElementById('btn-contrast');
-const btnReadPage = document.getElementById('btn-read-page');
-const btnStopRead = document.getElementById('btn-stop-read');
-const btnReadSections = document.querySelectorAll('.btn-read-section');
-
-// 1. Controlo de Tamanho da Fonte (Aumentar / Diminuir)
-let fontSizeMultiplier = 100; // Percentagem inicial
-
-function updateFontSize() {
-    body.style.fontSize = fontSizeMultiplier + '%';
+/* DESIGN COMPLETO COM ESQUEMA DE TEMAS DINÂMICOS */
+:root {
+    /* Tema Azul Padrão (Elegante e Moderno) */
+    --bg-page: #f4f7f6;
+    --bg-card: #ffffff;
+    --primary-color: #1a5276;
+    --text-main: #2c3e50;
+    --text-muted: #566573;
+    --accent-bg: #ebf5fb;
+    --border-color: #d5dbdb;
+    --focus-ring: #2980b9;
+    --font-scale: 100%;
 }
 
-btnIncrease.addEventListener('click', () => {
-    if (fontSizeMultiplier < 200) { // Limite máximo de 200% por segurança de layout
-        fontSizeMultiplier += 15;
-        updateFontSize();
-    }
-});
-
-btnDecrease.addEventListener('click', () => {
-    if (fontSizeMultiplier > 85) { // Limite mínimo de 85%
-        fontSizeMultiplier -= 15;
-        updateFontSize();
-    }
-});
-
-// 2. Alternador de Alto Contraste
-btnContrast.addEventListener('click', () => {
-    body.classList.toggle('high-contrast');
-});
-
-// 3. Sistema de Leitura de Texto por Voz (Text-to-Speech)
-function speakText(text) {
-    // Se já houver algo a ser lido, para a leitura atual primeiro
-    if (synth.speaking) {
-        synth.cancel();
-    }
-
-    if (text.trim() === '') return;
-
-    currentUtterance = new SpeechSynthesisUtterance(text);
-    currentUtterance.lang = 'pt-BR'; // Define o idioma para Português
-
-    // Controla a visibilidade do botão de parar
-    currentUtterance.onstart = () => {
-        btnStopRead.classList.remove('hidden');
-    };
-
-    currentUtterance.onend = () => {
-        btnStopRead.classList.add('hidden');
-    };
-
-    synth.speak(currentUtterance);
+/* TEMA: ALTO CONTRASTE */
+body.theme-contrast {
+    --bg-page: #000000;
+    --bg-card: #111111;
+    --primary-color: #ffff00;
+    --text-main: #ffff00;
+    --text-muted: #ffffff;
+    --accent-bg: #222222;
+    --border-color: #ffff00;
+    --focus-ring: #ffffff;
 }
 
-// Botão para interromper a voz a qualquer momento
-btnStopRead.addEventListener('click', () => {
-    if (synth.speaking) {
-        synth.cancel();
-        btnStopRead.classList.add('hidden');
-    }
-});
+/* TEMA: VERMELHO */
+body.theme-red {
+    --bg-page: #fdf2f2;
+    --bg-card: #ffffff;
+    --primary-color: #c0392b;
+    --text-main: #2c3e50;
+    --text-muted: #7b241c;
+    --accent-bg: #f9ebea;
+    --border-color: #f5b7b1;
+    --focus-ring: #e74c3c;
+}
 
-// Função para extrair e ler todo o conteúdo de texto legível da página
-btnReadPage.addEventListener('click', () => {
-    const mainContent = document.getElementById('main-content');
-    // Captura apenas os textos limpos dentro do main (ignorando os botões de áudio)
-    let pageText = document.querySelector('header').innerText + '. ';
-    
-    const paragraphsAndHeaders = mainContent.querySelectorAll('h2, p, li');
-    paragraphsAndHeaders.forEach(element => {
-        pageText += element.innerText + '. ';
-    });
+/* TEMA: VERDE */
+body.theme-green {
+    --bg-page: #f4f9f4;
+    --bg-card: #ffffff;
+    --primary-color: #1e8449;
+    --text-main: #196f3d;
+    --text-muted: #27ae60;
+    --accent-bg: #e8f8f5;
+    --border-color: #a9dfbf;
+    --focus-ring: #2ecc71;
+}
 
-    speakText(pageText);
-});
+/* TEMA: LARANJA */
+body.theme-orange {
+    --bg-page: #fef9e7;
+    --bg-card: #ffffff;
+    --primary-color: #d35400;
+    --text-main: #2e4053;
+    --text-muted: #e67e22;
+    --accent-bg: #fdf2e9;
+    --border-color: #f5cbf7;
+    --focus-ring: #f39c12;
+}
 
-// Configuração dos botões de leitura individuais por secção
-btnReadSections.forEach(button => {
-    button.addEventListener('click', (event) => {
-        // Encontra a secção pai mais próxima do botão clicado
-        const parentSection = event.target.closest('section');
-        
-        // Pega os textos da secção, ignorando o texto do próprio botão
-        let sectionText = parentSection.querySelector('h2').innerText + '. ';
-        const elements = parentSection.querySelectorAll('p, li');
-        
-        elements.forEach(el => {
-            sectionText += el.innerText + '. ';
-        });
+/* TEMA: ROSA */
+body.theme-pink {
+    --bg-page: #fbeee6;
+    --bg-card: #ffffff;
+    --primary-color: #b03a2e;
+    --text-main: #4a235a;
+    --text-muted: #af7ac5;
+    --accent-bg: #f5eeec;
+    --border-color: #f5b7b1;
+    --focus-ring: #ec407a;
+}
 
-        speakText(sectionText);
-    });
-});
+/* RESET E BASE */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.8;
+    font-size: calc(var(--font-scale) * 1.1);
+    transition: background-color 0.25s, color 0.25s;
+}
+
+/* INTERAÇÃO HUMANO-COMPUTADOR: INDICADOR DE FOCO AGRESSIVO */
+*:focus {
+    outline: 4px solid var(--focus-ring) !important;
+    outline-offset: 5px;
+}
+
+/* PAINEL DE ACESSIBILIDADE FIXO */
+.accessibility-bar {
+    background-color: var(--bg-card);
+    border-bottom: 3px solid var(--primary-color);
+    padding: 12px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.bar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.control-label {
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+/* BOTÕES DE CORES */
+.theme-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+}
+.theme-btn:hover { transform: scale(1.15); }
+.btn-default { background-color: #1a5276; }
+.btn-contrast { background-color: #ffff00; border-color: #000; }
+.btn-red { background-color: #c0392b; }
+.btn-green { background-color: #1e8449; }
+.btn-orange { background-color: #d35400; }
+.btn-pink { background-color: #ec407a; }
+
+/* CONTROLES DE TEXTO E VOZ */
+#btn-increase, #btn-decrease, .action-btn-audio, .action-btn-stop, .btn-read-section {
+    background-color: var(--accent-bg);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 6px 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+#voice-select {
+    padding: 6px;
+    border-radius: 6px;
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    border: 2px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+/* HERO HEADER */
+.hero-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2c3e50 100%);
+    color: #ffffff;
+    padding: 60px 20px;
+    text-align: center;
+    box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+}
+
+body.theme-contrast .hero-header {
+    background: #000000;
+    border-bottom: 4px solid #ffff00;
+}
+
+.hero-header h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+/* MENU DE NAVEGAÇÃO */
+.main-navigation {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.main-navigation ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.main-navigation a {
+    display: block;
+    padding: 16px 24px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color 0.2s;
+}
+
+.main-navigation a:hover {
+    background-color: var(--accent-bg);
+    text-decoration: underline;
+}
+
+/* ÁREA DE CONTEÚDO */
+main {
+    max-width: 950px;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+section {
+    background-color: var(--bg-card);
+    padding: 35px;
+    border-radius: 12px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid var(--border-color);
+}
+
+.section-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent-bg);
+    padding-bottom: 15px;
+    margin-bottom: 22px;
+    gap: 15px;
+}
+
+h2 {
+    font-size: 1.75rem;
+    color: var(--primary-color);
+}
+
+p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+ul {
+    margin-left: 30px;
+    margin-bottom: 25px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+/* GRID DE FLASHCARDS */
+.grid-flashcards {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.flashcard-box {
+    width: 290px;
+    height: 190px;
+    perspective: 1000px;
+}
+
+.flashcard-flip {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    border-radius: 10px;
+    border: 2px solid var(--border-color);
+}
+
+.flashcard-box:hover .flashcard-flip, .flashcard-box:focus .flashcard-flip {
+    transform: rotateY(180deg);
+}
+
+.card-front-side, .card-back-side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.card-front-side {
+    background-color: var(--accent-bg);
+    color: var(--primary-color);
+}
+
+.card-back-side {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transform: rotateY(180deg);
+}
+
+body.theme-contrast .card-back-side {
+    color: #ffff00;
+}
+
+/* RODAPÉ */
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: var(--bg-card);
+    border-top: 2px solid var(--border-color);
+    margin-top: 60px;
+    color: var(--text-muted);
+}
+
+.hidden { display: none !important; }
