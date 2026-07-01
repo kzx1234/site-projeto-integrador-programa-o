@@ -334,23 +334,67 @@ footer {
 
 .hidden { display: none !important; }
 
-/* ESTRUTURA INTEGRADA DA IMAGEM E LEGENDA */
+/* ESTRUTURA INTEGRADA DA IMAGEM, BOTÕES E LEGENDA */
 .image-container {
     width: 100% !important;
-    max-width: 380px !important;    /* Controla o tamanho padrão certinho dentro do card */
-    margin: 30px auto !important;   /* Centraliza tudo horizontalmente */
-    display: block !important;
+    margin: 35px auto !important;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
 }
 
-.image-container > img {
+/* Caixa de controle estrutural para limitar e alinhar o tamanho inicial */
+.image-wrapper-box {
+    width: 100%;
+    max-width: 950px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-container img {
     width: 100% !important;
+    max-width: 380px !important;    /* Tamanho padrão (pequeno) inicial */
     height: auto !important;
     display: block !important;
     object-fit: contain !important;
     border-radius: 8px !important;
     box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
     border: 1px solid var(--border-color) !important;
+    transition: max-width 0.3s ease-in-out !important; /* Transição suave de tamanho */
+}
+
+/* CLASSE DE EXPANSÃO INTERATIVA (ACIONADA PELO SCRIPT) */
+.image-container img.is-expanded {
+    max-width: 750px !important;    /* Tamanho ampliado confortável na tela */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important;
+}
+
+/* BOTÕES DE CONTROLE DE ZOOM */
+.image-zoom-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.zoom-btn {
+    background-color: var(--accent-bg);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.zoom-btn:hover {
+    opacity: 0.9;
+    text-decoration: underline;
 }
 
 /* TEXTO DA LEGENDA ALTERNATIVA VISÍVEL */
@@ -358,65 +402,24 @@ footer {
     font-size: 0.9rem !important;
     color: var(--text-muted) !important;
     line-height: 1.4 !important;
-    margin-top: 12px !important;
-    margin-bottom: 15px !important;
+    max-width: 600px;
+    margin: 5px auto 0 auto !important;
     padding: 0 10px !important;
     font-style: italic;
 }
 
-/* BOTÃO E CONTAINER DE EXPANSÃO (ZOOM) */
-.expand-image-details {
-    display: block;
-    margin-top: 10px;
+/* CONFIGURAÇÕES E ADAPTAÇÕES PARA O TEMA DE ALTO CONTRASTE */
+body.theme-contrast .image-caption { 
+    color: var(--text-main) !important; 
 }
-
-.expand-trigger {
-    background-color: var(--accent-bg);
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    padding: 6px 12px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    display: inline-block;
-    list-style: none; /* Esconde a setinha nativa do summary */
-    transition: background-color 0.2s;
+body.theme-contrast .zoom-btn { 
+    border-color: #ffff00; 
+    color: #ffff00; 
+    background: #000; 
 }
-
-.expand-trigger::-webkit-details-marker {
-    display: none; /* Esconde a setinha no Safari/Chrome antigo */
+body.theme-contrast .image-container img { 
+    filter: brightness(0.85) contrast(1.1) !important; 
 }
-
-.expand-trigger:hover {
-    opacity: 0.9;
-    text-decoration: underline;
+body.theme-contrast .image-container img.is-expanded { 
+    border-color: #ffff00 !important; 
 }
-
-/* Caixa onde a imagem abre grande */
-.expanded-box {
-    margin-top: 15px;
-    width: 100%;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-.expanded-box img {
-    width: 100% !important;
-    max-width: 800px !important; /* Permite que ela cresça bem mais quando aberta */
-    height: auto !important;
-    border-radius: 8px;
-    border: 2px solid var(--primary-color);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-/* Efeito de suavidade ao abrir */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Compatibilidade das legendas e botões nos temas */
-body.theme-contrast .image-caption { color: var(--text-main) !important; }
-body.theme-contrast .expand-trigger { border-color: #ffff00; color: #ffff00; background: #000; }
-body.theme-contrast .expanded-box img { border-color: #ffff00; }
-body.theme-contrast .image-container > img { filter: brightness(0.85) contrast(1.1) !important; }
