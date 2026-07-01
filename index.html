@@ -3,92 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visão Fácil - Acessibilidade Digital e Cegueira</title>
+    <title>Visão Inclusiva - Consciência e Acessibilidade Digital</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="accessibility-bar" role="toolbar" aria-label="Ferramentas de Acessibilidade">
-        <button id="btn-increase" aria-label="Aumentar tamanho do texto">A+</button>
-        <button id="btn-decrease" aria-label="Diminuir tamanho do texto">A-</button>
-        <button id="btn-contrast" aria-label="Alternar Alto Contraste">Alternar Contraste</button>
-        <button id="btn-read-page" aria-label="Ouvir toda a página">Ouvir Página Completa 🔊</button>
-        <button id="btn-stop-read" aria-label="Parar leitura de voz" class="hidden">Parar Leitura ⏹️</button>
+    <div class="accessibility-bar" role="toolbar" aria-label="Painel de Acessibilidade">
+        <div class="bar-container">
+            <div class="control-group">
+                <span class="control-label">Texto:</span>
+                <button id="btn-decrease" aria-label="Diminuir tamanho da letra">A-</button>
+                <button id="btn-increase" aria-label="Aumentar tamanho da letra">A+</button>
+            </div>
+
+            <div class="control-group">
+                <span class="control-label">Temas:</span>
+                <button class="theme-btn btn-default" data-theme="default" title="Tema Padrão Azul" aria-label="Mudar tema para Azul Padrão"></button>
+                <button class="theme-btn btn-contrast" data-theme="contrast" title="Alto Contraste" aria-label="Mudar tema para Alto Contraste Negro e Amarelo"></button>
+                <button class="theme-btn btn-red" data-theme="red" title="Tema Vermelho" aria-label="Mudar tema para Vermelho"></button>
+                <button class="theme-btn btn-green" data-theme="green" title="Tema Verde" aria-label="Mudar tema para Verde"></button>
+                <button class="theme-btn btn-orange" data-theme="orange" title="Tema Laranja" aria-label="Mudar tema para Laranja"></button>
+                <button class="theme-btn btn-pink" data-theme="pink" title="Tema Rosa" aria-label="Mudar tema para Rosa"></button>
+            </div>
+
+            <div class="control-group voice-panel">
+                <label for="voice-select" class="control-label">Perfil de Voz:</label>
+                <select id="voice-select" aria-label="Selecionar tipo de voz de leitura">
+                    <option value="fem-1">Feminina Principal (Padrão)</option>
+                    <option value="fem-2">Feminina Alternativa</option>
+                    <option value="masc-1">Masculina Principal</option>
+                    <option value="masc-2">Masculina Alternativa</option>
+                </select>
+                <button id="btn-read-page" class="action-btn-audio">🔊 Ouvir Página</button>
+                <button id="btn-stop-read" class="action-btn-stop hidden">⏹️ Parar</button>
+            </div>
+        </div>
     </div>
 
-    <header role="banner">
-        <h1>Visão Fácil</h1>
-        <p>Projeto Integrador: Inteligência Artificial e Tecnologias Assistivas</p>
+    <header role="banner" class="hero-header">
+        <div class="header-content">
+            <h1>Visão Inclusiva</h1>
+            <p>Compreendendo a cegueira e expandindo os horizontes através da Interação Humano-Computador</p>
+        </div>
     </header>
 
-    <nav role="navigation" aria-label="Menu Principal">
+    <nav role="navigation" class="main-navigation" aria-label="Menu de Seções">
         <ul>
-            <li><a href="#sobre">Sobre o Projeto</a></li>
+            <li><a href="#o-que-e">O que é a Cegueira</a></li>
+            <li><a href="#graus">Tipos e Graus</a></li>
             <li><a href="#tecnologias">Tecnologias Assistivas</a></li>
-            <li><a href="#flashcards">Flashcards de Estudo</a></li>
+            <li><a href="#flashcards">Central de Aprendizado</a></li>
         </ul>
     </nav>
 
     <main role="main" id="main-content">
         
-        <section id="sobre" aria-labelledby="tit-sobre">
-            <div class="section-header">
-                <h2 id="tit-sobre">Cegueira e a Inclusão Digital</h2>
-                <button class="btn-read-section" aria-label="Ouvir secção sobre inclusão digital">Ouvir Secção 🔊</button>
+        <section id="o-que-e" aria-labelledby="title-o-que-e">
+            <div class="section-title-wrapper">
+                <h2 id="title-o-que-e">O que é a Cegueira?</h2>
+                <button class="btn-read-section" aria-label="Ouvir seção O que é a Cegueira">Ouvir Seção 🔊</button>
             </div>
-            <p>A cegueira e a baixa visão afetam milhões de pessoas no mundo. No ambiente digital, a falta de acessibilidade em sites cria barreiras invisíveis que impedem o acesso à informação, à educação e à autonomia.</p>
-            <p>Este site foi desenvolvido como parte do Projeto Integrador do 2º trimestre. O nosso objetivo é demonstrar como práticas simples de UX (Experiência do Usuário) e HCI (Interação Humano-Computador) podem tornar a web um lugar inclusivo para todos.</p>
+            <p>A cegueira vai muito além da total ausência de percepção visual. Ela é uma condição complexa que impacta a forma como os indivíduos coletam informações do mundo ao seu redor, dependendo de outros sentidos como a audição, o tato e o olfato para mapear a realidade geográfica e social.</p>
+            <p>Cientificamente, ela pode ser caracterizada como a perda total ou parcial da capacidade de enxergar, decorrente de fatores congênitos (quando o indivíduo já nasce com a condição devido a problemas genéticos ou infecções gestacionais) ou adquiridos ao longo da vida (causados por traumas, acidentes ou patologias crônicas).</p>
+            <p>Entender a cegueira sob a perspectiva social significa compreender que a barreira não está na deficiência física do indivíduo, mas sim no design dos ambientes públicos, produtos e sites da internet que não foram projetados de forma universal para abraçar a diversidade humana.</p>
         </section>
 
-        <section id="tecnologias" aria-labelledby="tit-tec">
-            <div class="section-header">
-                <h2 id="tit-tec">O que são Tecnologias Assistivas?</h2>
-                <button class="btn-read-section" aria-label="Ouvir secção sobre tecnologias assistivas">Ouvir Secção 🔊</button>
+        <section id="graus" aria-labelledby="title-graus">
+            <div class="section-title-wrapper">
+                <h2 id="title-graus">Graus de Deficiência Visual e Causas Comuns</h2>
+                <button class="btn-read-section" aria-label="Ouvir seção Graus de Deficiência">Ouvir Seção 🔊</button>
             </div>
-            <p>Tecnologias assistivas são recursos, ferramentas ou sistemas que promovem a funcionalidade e a autonomia de pessoas com deficiência. Para pessoas cegas ou com baixa visão, destacam-se:</p>
+            <p>A deficiência visual divide-se em categorias técnicas que determinam o nível de autonomia do paciente e os tipos de recursos de acessibilidade que ele necessitará para interagir com telas digitais:</p>
             <ul>
-                <li><strong>Leitores de Tela:</strong> Softwares que transformam texto em áudio sintetizado (ex: NVDA, JAWS).</li>
-                <li><strong>Ampliadores de Tela:</strong> Ferramentas que aumentam partes da interface para quem tem baixa visão.</li>
-                <li><strong>Sistemas de Alto Contraste:</strong> Ajustes de cores que facilitam a distinção de elementos e textos.</li>
+                <li><strong>Cegueira Total:</strong> Ausência completa de visão ou apenas percepção de luz, sem distinção de formas ou direção dos raios luminosos. Requer leitores de tela absolutos ou sistemas em Braille.</li>
+                <li><strong>Baixa Visão ou Visão Subnormal:</strong> Redução severa que não pode ser totalmente corrigida com óculos comuns, lentes de contato ou cirurgias. Usuários nesta categoria dependem de expansão de fontes, inversão de cores e temas de alto contraste.</li>
             </ul>
+            <p>As causas mais recorrentes para o desenvolvimento da perda visual na sociedade moderna incluem o Glaucoma (aumento da pressão interna ocular), a Retinopatia Diabética (danos nos vasos sanguíneos da retina causados pelo excesso de glicose), a Catarata (opacidade do cristalino) e a Degeneração Macular Relacionada à Idade (DMRI), que afeta o centro do campo de visão.</p>
         </section>
 
-        <section id="flashcards" aria-labelledby="tit-flash">
-            <div class="section-header">
-                <h2 id="tit-flash">Flashcards Educativos (Etapa 1)</h2>
-                <button class="btn-read-section" aria-label="Ouvir secção dos flashcards">Ouvir Secção 🔊</button>
+        <section id="tecnologias" aria-labelledby="title-tecnologias">
+            <div class="section-title-wrapper">
+                <h2 id="title-tecnologias">Tecnologias Assistivas e UX/HCI</h2>
+                <button class="btn-read-section" aria-label="Ouvir seção Tecnologias Assistivas">Ouvir Seção 🔊</button>
             </div>
-            <p>Passe o rato ou foque com o teclado para revelar a resposta do cartão.</p>
+            <p>No universo do desenvolvimento web, os conceitos de UX (Experiência do Usuário) e HCI (Interação Humano-Computador) determinam o sucesso da navegação para pessoas com necessidades especiais. Sistemas bem projetados se comunicam perfeitamente com os ecossistemas das tecnologias assistivas.</p>
+            <p>Os principais softwares utilizados por pessoas cegas são os <strong>Leitores de Tela</strong>. Eles mapeiam toda a árvore lógica do documento HTML e traduzem o conteúdo escrito em áudio fonético. Para que isso funcione, o programador é obrigado a criar códigos semânticos limpos e descrições detalhadas nas imagens através do atributo alt.</p>
+            <p>Além disso, o uso correto de espaçamentos tipográficos, paletas de cores balanceadas e a eliminação de efeitos piscantes cansativos evitam a fadiga ocular em pessoas que possuem baixa visão ou visões periféricas limitadas.</p>
+        </section>
+
+        <section id="flashcards" aria-labelledby="title-flashcards">
+            <div class="section-title-wrapper">
+                <h2 id="title-flashcards">Central de Aprendizado Dinâmico</h2>
+                <button class="btn-read-section" aria-label="Ouvir seção Central de Aprendizado">Ouvir Seção 🔊</button>
+            </div>
+            <p>Estude conceitos fundamentais de acessibilidade com os cartões interativos abaixo. Passe o mouse ou selecione com a tecla Tab para revelar as explicações.</p>
             
-            <div class="flashcards-container">
-                <div class="card" tabindex="0" aria-label="Flashcard 1: O que é UX? Foque ou passe o rato para ver a resposta.">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <h3>O que significa UX?</h3>
+            <div class="grid-flashcards">
+                <div class="flashcard-box" tabindex="0" aria-label="Cartão Educativo sobre Acessibilidade Digital.">
+                    <div class="flashcard-flip">
+                        <div class="card-front-side">
+                            <h3>Acessibilidade Web</h3>
                         </div>
-                        <div class="card-back">
-                            <p>Significa User Experience (Experiência do Usuário). É como uma pessoa se sente ao interagir com um sistema digital.</p>
+                        <div class="card-back-side">
+                            <p>É a prática de garantir que não existam barreiras que impeçam a interação ou o acesso a sites por pessoas com qualquer tipo de deficiência física ou cognitiva.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="card" tabindex="0" aria-label="Flashcard 2: O que é HCI? Foque ou passe o rato para ver a resposta.">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <h3>O que significa HCI?</h3>
+                <div class="flashcard-box" tabindex="0" aria-label="Cartão Educativo sobre Semântica HTML.">
+                    <div class="flashcard-flip">
+                        <div class="card-front-side">
+                            <h3>HTML Semântico</h3>
                         </div>
-                        <div class="card-back">
-                            <p>Significa Human-Computer Interaction (Interação Humano-Computador). Estudo do design de interfaces para que a comunicação entre humanos e máquinas seja eficiente.</p>
+                        <div class="card-back-side">
+                            <p>Uso de tags corretas (como main, section, nav) para indicar o real significado do conteúdo, permitindo que os leitores de tela entendam a ordem lógica da página.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <footer role="contentinfo">
-        <p>&copy; 2026 - Projeto Integrador: Inteligência Artificial e Acessibilidade. Desenvolvido para o 2º Trimestre.</p>
+        <p>&copy; 2026 - Visão Inclusiva. Trabalho acadêmico desenvolvido para o Projeto Integrador do 2º Trimestre.</p>
     </footer>
 
     <script src="script.js"></script>
