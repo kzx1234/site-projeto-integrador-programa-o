@@ -334,26 +334,26 @@ footer {
 
 .hidden { display: none !important; }
 
-/* AJUSTE PROPORCIONAL E CENTRALIZADO DA IMAGEM */
+/* AJUSTE SEGURO, CENTRALIZADO E IMPEDIDO DE DISTORCER O LAYOUT */
 .image-wrapper {
-    width: 100%;
-    max-width: 480px;      /* Restringe o tamanho dentro do card */
-    margin: 25px auto;      /* Centraliza horizontalmente e dá espaço dos textos */
-    display: block;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-    border: 1px solid var(--border-color);
+    width: 100% !important;
+    max-width: 380px !important;    /* Reduzido para encaixar perfeitamente e sobrar margens limpas */
+    margin: 30px auto !important;   /* Força o alinhamento horizontal perfeitamente centralizado */
+    display: block !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+    border: 1px solid var(--border-color) !important;
 }
 
 .image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: contain;    /* Mantém as proporções reais da arte */
+    width: 100% !important;
+    height: auto !important;        /* Força a altura a recalcular dinamicamente e evita esticar */
+    display: block !important;
+    object-fit: contain !important; /* Preserva os eixos e proporções originais da imagem */
 }
 
-/* Filtro opcional de conforto visual no tema de Alto Contraste */
+/* Filtro de suavização de brilho para o tema de Alto Contraste */
 body.theme-contrast .image-wrapper img {
-    filter: brightness(0.85) contrast(1.1);
+    filter: brightness(0.85) contrast(1.1) !important;
 }
